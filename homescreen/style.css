@@ -1,0 +1,149 @@
+html,
+body {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+* {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  background-color: #B7B694;
+  box-sizing: border-box;
+  position: relative;
+  margin: 0;
+  max-width: 800px;
+  /* It was assuming margin weirdly */
+
+  /* display: flex; */
+  /* justify-content: center; Centers horizontally */
+  /* align-items: center; Centers vertically (optional) */
+}
+
+#header {
+  background-color: #9495B7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px; /* top+bottom, left+right */
+  height: 60px;
+  margin: 0;
+
+  /* Not specifying width, so it's full width */
+}
+
+.info-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.info-bar p {
+  font-size: 20px;
+}
+
+/* # for IDs, . for classes */
+#footer {
+  background-color: #9495B7;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+
+  /* Layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  /* How do we get the footer to be centered? */
+  width: 80%; /* 800px - 40px for padding */
+  position: fixed;
+  bottom: 0px;
+
+  left: 0;
+  right: 0;
+  margin: 0px auto;
+
+  max-height: 150px;
+
+  /* rounded corners */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  padding: 20px 20px;
+}
+
+.bottom-icons {
+  /* display: inline-block; Ensures the divs are treated as inline elements */
+  background-color: #D58EA9;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+  grid-template-rows: auto auto; /* Creates 2 rows that fit content */
+  gap: 10px; /* Space between grid items */
+  margin: 50px 50px;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-item {
+   /* display: inline-block; Ensures the divs are treated as inline elements */
+   background-color: #D58EA9;
+   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+   width: 80px;
+   height: 80px;
+   border-radius: 10px;
+   color: white;
+
+   /* Center the text */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+/* Classic container */
+.classic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.col-4 {
+  width: 33.33%;
+  padding: 10px;
+  box-sizing: border-box;
+
+  /* Styling */
+  background-color: #618D9A;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  color: white;
+
+  /* Center the text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* You can create different column widths */
+.col-6 { width: 50%; }
+.col-3 { width: 25%; }
+.col-12 { width: 100%; }
