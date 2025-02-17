@@ -1,0 +1,129 @@
+/* Ideally, max width of centered app incl. margins would be 380px */
+
+@font-face {
+  font-family: 'Inkt';
+  src: url('fonts/ink©t.ttf') format('truetype'),
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #EDB3C9;
+    /* #f0f0f0; Whitish*/
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: 'Inkt', sans-serif;
+  color: #7A1335;
+  padding: 15px;
+  font-size: 40px;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers children horizontally */
+  justify-content: space-between;
+  height: 85vh;
+  width: 100vw;
+  /* Needs height for justify-content to work */
+}
+
+/* #myCanvas {
+  /* For debugging: */
+  /* border: 1px solid black; */
+/* } */
+
+#choices-container {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  gap: 15px;
+}
+
+.choice-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 15vh; /* Fixed height for the container */
+}
+
+.choice-item > img {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Maintains aspect ratio */
+  object-position: center; /* Centers the image */
+}
+
+.choice-item-art {
+  width: 18vw;
+}
+
+.choice-item-sofa {
+  width: 30vw;
+}
+
+.choice-item-trinket {
+  width: 20vw;
+}
+
+/* Dimensions for the choice images */
+.art {
+  max-height: 15vh;
+  max-width: 10vw;
+}
+
+.sofa {
+  max-height: 15vh;
+  max-width: 30vw;
+}
+
+.trinket {
+  max-height: 10vh;
+  max-width: 20vw;
+}
+
+/* PERFECT! */
+/* img {
+  -webkit-filter: drop-shadow(2px 2px 0 white)
+                  drop-shadow(-2px 2px 0 white)
+                  drop-shadow(2px -2px 0 white)
+                  drop-shadow(-2px -2px 0 white);
+
+  filter: drop-shadow(2px 2px 0 white)
+          drop-shadow(-2px 2px 0 white)
+          drop-shadow(2px -2px 0 white)
+          drop-shadow(-2px -2px 0 white);
+} */
+
+/* FOR NUMBER TAGS */
+.image-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-circle {
+  /* Values set through drawItemWithEffect() in script.js */
+    /* position: absolute;
+    top: 0;
+    right: 0; */
+
+  width: 22px;
+  height: 22px;
+  background-color: #973455;  /* Matches your h1 color */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+
+  border: 4px solid #7A1335;
+}
