@@ -22,6 +22,7 @@ const artOptions = [
   'art/Mime-flower.jpg',
   'art/Luna_Luna_Archival_Objects_Silk_Scarf.png',
   'art/Yunji_Park_Blue.png',
+  'art/bed_with_clouds.png',
 ];
 
 const sofaOptions = [
