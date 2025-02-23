@@ -1,3 +1,10 @@
+// TODO:
+// Inspired by the clock website,
+// Make this canvas a circle, with draggable items,
+// + choice of items around a circle
+  // add a spinner wheel to randomize choice.
+  // add a button to stop the wheel.
+
 import('/src/style.css')
   .then((module) => {
   })
@@ -11,8 +18,10 @@ const artOptions = [
   'art/Jeff_Koons_Balloon_Dog.png',
   'art/Archival_Luna_Monde_Poster.png',
   'art/flowers.jpg',
+  'art/Yunji_Park.png',
   'art/Mime-flower.jpg',
   'art/Luna_Luna_Archival_Objects_Silk_Scarf.png',
+  'art/Yunji_Park_Blue.png',
 ];
 
 const sofaOptions = [
@@ -37,6 +46,9 @@ const trinketOptions = [
   'trinket/Basquiat_Ferris_Wheel_Pin.png',
   'trinket/Petite_Friture_Klump_Wall_hook.png',
   'trinket/Kartell_Componibili.png',
+  'trinket/Utensilio_Wall_Shelf_Georgio_de_Ferrari_1970.png',
+  // 'trinket/Utensilo_White_Plastic_Wall_Shelf_1970.png',
+  // 'trinket/Visiva_Wall_storage_system_1970.png',
 ];
 
 // Current indices
