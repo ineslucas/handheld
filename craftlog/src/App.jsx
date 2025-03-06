@@ -6,14 +6,15 @@ import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const Container = styled.div`
-  margin: 100px 100px;
+  margin: 100px auto;
   padding: 20px;
 `;
 
 const UploadSection = styled.div`
   margin-bottom: 20px;
   padding: 10px;
-  border: 1px dashed #ccc;
+  border: 1px dotted #ccc;
+  border-radius: 10px;
 
   input[type="file"] {
     display: block;
@@ -21,7 +22,12 @@ const UploadSection = styled.div`
   }
 `;
 
+// Photo item inside the upload section
 const PhotoPreview = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   img {
     max-width: 100%;
     height: auto;
@@ -30,11 +36,12 @@ const PhotoPreview = styled.div`
   }
 
   button {
-    background-color: #5cb85c;
+    background-color: #2A6227;
     color: white;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
+    width: 200px; // Match the image width
   }
 `;
 
@@ -45,11 +52,38 @@ const FilterSection = styled.div`
 
   div {
     margin-bottom: 10px;
+    width: 200px; // Add fixed width for consistent sizing
   }
 
   label {
-    display: block;
+    display: none;
     margin-bottom: 5px;
+    font-family: "Inter", sans-serif;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid #943E59;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    transition: border-color 0.3s ease;
+    color: #4C325F;
+    background-color: #DFD7A8;
+
+    &:focus {
+      border-color: #B5466C; // Using your existing color theme
+      outline: none;
+    }
+
+    option {
+      color: #B5466C;
+
+      &:first-child {
+        color: rgba(181, 70, 108, 0.7); // Slightly transparent version for placeholder
+      }
+    }
   }
 `;
 
@@ -63,6 +97,9 @@ const PhotoItem = styled.div`
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
+  background-color: #B5466C;
+  color: #FBF7DE;
+  // For text color
 
   img {
     max-width: 100%;
@@ -91,22 +128,57 @@ function App() {
       }
   };
 
-  const handleSavePhoto = (event) => {
+  const handleSavePhoto = async (event) => {
       event.preventDefault();
       if (newPhoto) {
           const projectName = prompt("Enter project name:");
           if (projectName) {
-              const newEntry = {
-                  id: Date.now(),
-                  src: newPhoto.src,
-                  projectName: projectName,
-                  date: new Date().toLocaleDateString()
+            try {
+              // 1. Upload image to Firebase Storage
+              const storageRef = ref(storage, `photos/${newPhoto.file.name}-${Date.now()}`);
+              await uploadBytes(storageRef, newPhoto.file);
+              const downloadURL = await getDownloadURL(storageRef);
+
+              // 2. Save metadata to Firestore
+              const photoData = {
+                projectName: projectName,
+                date: new Date().toLocaleDateString(),
+                imageUrl: downloadURL,
+                timestamp: new Date().getTime()
               };
-              setPhotos([...photos, newEntry]);
+
+              await addDoc(collection(db, "photos"), photoData);
+
+              // 3. Update local state
+              setPhotos([...photos, { ...photoData, id: Date.now(), src: downloadURL }]);
               setNewPhoto(null);
+            } catch (error) {
+              console.error("Error saving photo:", error);
+              alert("Error saving photo. Please try again.");
+            }
           }
       }
   };
+
+  // added useEffect to load photos from Firestore when component mounts
+  React.useEffect(() => {
+    const loadPhotos = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "photos"));
+        const loadedPhotos = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          src: doc.data().imageUrl,
+          projectName: doc.data().projectName,
+          date: doc.data().date
+        }));
+        setPhotos(loadedPhotos);
+      } catch (error) {
+        console.error("Error loading photos:", error);
+      }
+    };
+
+    loadPhotos();
+  }, []);
 
   const handleProjectFilterChange = (event) => {
       setProjectFilter(event.target.value);
