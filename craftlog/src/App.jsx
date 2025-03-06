@@ -1,3 +1,7 @@
+// Future additions:
+// Make it a calendar view and have photos be displayed on top of each other and animated nicely
+// View per project
+
 import React from 'react';
 import styled from 'styled-components';
 import './App.css';
@@ -8,17 +12,41 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 const Container = styled.div`
   margin: 100px auto;
   padding: 20px;
+
+  // Center the content
+  max-width: 1200px; // Add a max-width to control the content width
+  width: 90%; // Use percentage width for responsiveness
 `;
 
 const UploadSection = styled.div`
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 20px;
   border: 1px dotted #ccc;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   input[type="file"] {
-    display: block;
-    margin-bottom: 10px;
+    display: none; // Hide the actual file input
+  }
+`;
+
+const UploadButton = styled.label`
+  display: inline-block;
+  background-color: #2A6227;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  width: 200px;
+
+  &:hover {
+    background-color: #1e4a1c;
   }
 `;
 
@@ -209,7 +237,16 @@ function App() {
       <h1>Craftlog</h1>
 
       <UploadSection>
-        <input type="file" accept="image/*" onChange={handlePhotoUpload} />
+        <input
+          type="file"
+          id="photo-upload"
+          accept="image/*"
+          onChange={handlePhotoUpload}
+        />
+        <UploadButton htmlFor="photo-upload">
+          Choose Photo
+        </UploadButton>
+
         {newPhoto && (
           <PhotoPreview>
             <img src={newPhoto.src} alt="New Photo" style={{maxWidth: '200px'}}/>

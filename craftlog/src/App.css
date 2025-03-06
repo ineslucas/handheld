@@ -3,78 +3,24 @@ body {
   margin: 0;
   padding: 0;
   background-color: #FBF7DE;
+
+  /* To center the content, but loses responsiveness */
+  min-height: 100vh; /* Ensure body takes up full viewport height */
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: flex-start; /* Align to top */
+}
+
+@font-face {
+  font-family: 'Ring';
+  src: url('/fonts/bianzhidai-Ring.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 h1 {
   text-align: center;
   color: #EDB3C9;
-}
-
-
-/* NOT IN USE */
-.craftlog-container {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.upload-section {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px dashed #ccc;
-}
-
-.upload-section input[type="file"] {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.new-photo-preview img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
-}
-
-.new-photo-preview button {
-  background-color: #5cb85c;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-}
-
-.filter-section {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.filter-section div {
-  margin-bottom: 10px;
-}
-
-.filter-section label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.photo-item {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-}
-
-.photo-item img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
+  font-family: 'Ring';
+  font-size: 120px;
 }
